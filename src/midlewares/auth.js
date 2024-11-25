@@ -8,7 +8,7 @@ export const checkAuth = async (req,res,next)=>{
         
             // console.log(token);
             if(!token){
-                res.status(403).json({message: "Bạn chưa đăng nhập"});
+                return res.status(403).json({message: "Bạn chưa đăng nhập"});
             }
             
             jwt.verify(token, process.env.SECRET_KEY,(err,decoded)=>{
@@ -18,8 +18,8 @@ export const checkAuth = async (req,res,next)=>{
                     else if(err.name =="TokenExpiredError")
                         return res.status(401).json({message: "Token hết hạn"});
                 }
-                console.log(decoded);
-                
+                // console.log(decoded);
+                req.user = decoded;
                 next();
             })
             

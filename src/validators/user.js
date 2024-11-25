@@ -23,6 +23,7 @@ export const userValidator = Joi.object({
     "any.required": "Confirm Password là bắt buộc",
     "any.only": "Confirm Password không trùng",
   }),
+  role: Joi.number(),
 });
 
 export const signinValidator = Joi.object({

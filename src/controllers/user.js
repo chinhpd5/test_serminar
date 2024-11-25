@@ -13,7 +13,7 @@ export async function register(req,res){
             return res.status(400).json({message: messageErrors})
         }
 
-        const exitsEmail =await User.findOne({email: req.body.email});
+        const exitsEmail = await User.findOne({email: req.body.email});
         if(exitsEmail){
             return res.status(400).json({message: "email này đã tồn tại"})
         }
@@ -56,7 +56,7 @@ export async function login(req, res){
             return res.status(400).json({message: "Sai mật khẩu"});
         }
 
-        const token = jwt.sign({username: userExist.username },process.env.SECRET_KEY,{expiresIn: '2h'})
+        const token = jwt.sign({id:userExist._id,username: userExist.username,role:userExist.role  },process.env.SECRET_KEY,{expiresIn: '2h'})
 
         return res.status(200).json({
             message: "Đăng nhập thành công",
